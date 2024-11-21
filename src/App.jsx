@@ -4,7 +4,8 @@ import { ProductContext } from './context/ProductContext'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const {data} = useContext(ProductContext)
+
+  const {data, handleIncrement, handleDecrement, subtotal, items} = useContext(ProductContext)
 
   return (
     <>
@@ -21,9 +22,9 @@ function App() {
             <p>{product.description}</p>
           </div>
           <div className='col-1 d-flex flex-column justify-content-center text-center'>
-            <button type='button' className='btn btn-light'>+</button>
-            <h5>0</h5>
-            <button type='button' className='btn btn-light'>-</button>
+            <button type='button' className='btn btn-light' onClick={()=>handleIncrement(index)}>+</button>
+            <h5>{product.quantity}</h5>
+            <button type='button' className='btn btn-light' onClick={()=>handleDecrement(index)}>-</button>
           </div>
           <div className='col-2 align-self-center'>
           <h4>${product.price}</h4>
@@ -39,7 +40,7 @@ function App() {
               <h6>TOTAL CART ITEMS:</h6>
             </div>
             <div className="col-6 text-end">
-              <h6>0</h6>
+              <h6>{items}</h6>
             </div>
           </div>
 
@@ -48,7 +49,7 @@ function App() {
               <h6>SUBTOTAL:</h6>
             </div>
             <div className="col-6 text-end">
-              <h6>$0</h6>
+              <h6>${subtotal}</h6>
             </div>
           </div>
 
@@ -66,7 +67,7 @@ function App() {
               <h5>TOTAL:</h5>
             </div>
             <div className="col-6 text-end">
-              <h5>$0</h5>
+              <h5>${subtotal}</h5>
             </div>
           </div>
         </div>
