@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import PropTypes from 'prop-types';
+
 
 export const ProductContext = createContext({
     data: [],
@@ -16,7 +18,7 @@ export default function ProductContextProvider({children}) {
     const [items, setItems] = useState(0)
 
     useEffect(()=>{
-        fetch('https://github.com/sandhyachan/react-useContext-task/blob/4a42b03b44f263748581a3ecee95f3e779867307/public/products.json')
+        fetch('https://github.com/sandhyachan/JSON-Files/blob/9ac00cf46eb5160daf3067d988decc6d8b5237ef/contextApi/products.json')
         .then(response => response.json())
         .then(result => setData(result))
         .catch(err => console.log(`Error fetching data ${err}`))
@@ -47,4 +49,8 @@ export default function ProductContextProvider({children}) {
     return <ProductContext.Provider value={{data, handleIncrement, handleDecrement, subtotal, items}}>
         {children}
     </ProductContext.Provider>
+}
+
+ProductContextProvider.propTypes = {
+    children: PropTypes.node.isRequired
 }
