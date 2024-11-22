@@ -24,7 +24,7 @@ function App() {
           <div className='col-1 d-flex flex-column justify-content-center text-center'>
             <button type='button' className='btn btn-light' onClick={()=>handleIncrement(index)}>+</button>
             <h5>{product.quantity}</h5>
-            <button type='button' className='btn btn-light' onClick={()=>handleDecrement(index)}>-</button>
+            <button type='button' className='btn btn-light' onClick={()=>handleDecrement(index)} disabled={product.quantity<=0}>-</button>
           </div>
           <div className='col-2 align-self-center'>
           <h4>${product.price}</h4>

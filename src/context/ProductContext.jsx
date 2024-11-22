@@ -16,7 +16,7 @@ export default function ProductContextProvider({children}) {
     const [items, setItems] = useState(0)
 
     useEffect(()=>{
-        fetch('http://localhost:5173/products.json')
+        fetch('https://github.com/sandhyachan/react-useContext-task/blob/4a42b03b44f263748581a3ecee95f3e779867307/public/products.json')
         .then(response => response.json())
         .then(result => setData(result))
         .catch(err => console.log(`Error fetching data ${err}`))
@@ -25,7 +25,6 @@ export default function ProductContextProvider({children}) {
     function handleIncrement(index){
         const dataCopy = [...data]
         dataCopy[index].quantity +=1
-        setSubtotal(subtotal+dataCopy[index].price)
         setItems(items+1)
         setData(dataCopy)
     }
@@ -37,11 +36,15 @@ export default function ProductContextProvider({children}) {
         }
         dataCopy[index].quantity -=1
         setItems(items-1)
-        setSubtotal(subtotal-dataCopy[index].price)
         setData(dataCopy)
      }
+
+     useEffect(() => {
+        const newSubtotal = data.reduce((acc, product) => acc + product.price * product.quantity, 0)
+        setSubtotal(newSubtotal)
+    }, [data])
     
-    return <ProductContext.Provider value={{data, handleIncrement, handleDecrement, subtotal, items, setItems}}>
+    return <ProductContext.Provider value={{data, handleIncrement, handleDecrement, subtotal, items}}>
         {children}
     </ProductContext.Provider>
 }
