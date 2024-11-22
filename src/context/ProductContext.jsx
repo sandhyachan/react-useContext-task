@@ -18,7 +18,7 @@ export default function ProductContextProvider({children}) {
     const [items, setItems] = useState(0)
 
     useEffect(()=>{
-        fetch('https://github.com/sandhyachan/JSON-Files/blob/9ac00cf46eb5160daf3067d988decc6d8b5237ef/contextApi/products.json')
+        fetch('https://raw.githubusercontent.com/sandhyachan/JSON-Files/refs/heads/main/contextApi/products.json')
         .then(response => response.json())
         .then(result => setData(result))
         .catch(err => console.log(`Error fetching data ${err}`))
